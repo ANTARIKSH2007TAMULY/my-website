@@ -56,7 +56,7 @@
       left: 0;
       height: 100%;
       display: grid;
-      grid-template-rows: 3fr 2fr repeat(9, 1fr) 2fr;
+      grid-template-rows: 3fr 2fr repeat(9, 1fr) 3fr;
       background: url("img4.jpeg") no-repeat center center/cover;
       color: yellow;
       transition: transform 0.3s ease;
@@ -146,6 +146,10 @@
     }
 
     .footer-box {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 85%;
       background: rgba(0, 0, 0, 0.6);
       border: 2px solid yellow;
@@ -155,13 +159,6 @@
       font-size: 18px;
       color: white;
       box-shadow: 0 0 10px yellow, 0 0 20px rgba(255,255,0,0.6);
-      margin-top: auto;
-      margin-bottom: 10px;
-      align-self: center;
-    }
-
-    .footer-box p {
-      margin: 6px 0;
     }
 
     .sections a {
@@ -274,7 +271,6 @@
         width: 90%;
         font-size: 16px;
         padding: 10px;
-        margin-bottom: 10px;
       }
       .projects-section {
         width: 80%;
@@ -341,7 +337,6 @@
         width: 90%;
         font-size: 14px;
         padding: 8px;
-        margin-bottom: 10px;
       }
       .projects-section {
         width: 90%;
