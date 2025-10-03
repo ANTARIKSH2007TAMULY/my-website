@@ -11,27 +11,42 @@
       color: white;
     }
 
-    .menu-btn {
+    #menu-toggle {
       display: none;
     }
 
     .menu-icon {
-      display: none;
+      width: 35px;
+      height: 30px;
       position: fixed;
       top: 20px;
       left: 20px;
-      font-size: 30px;
-      color: yellow;
-      cursor: pointer;
       z-index: 1100;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
     }
 
-    .menu-icon div {
-      width: 30px;
+    .menu-icon span {
+      display: block;
       height: 4px;
+      width: 100%;
       background: yellow;
-      margin: 6px 0;
-      transition: 0.3s;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    #menu-toggle:checked + .menu-icon span:nth-child(1) {
+      transform: rotate(45deg) translateY(10px);
+    }
+
+    #menu-toggle:checked + .menu-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #menu-toggle:checked + .menu-icon span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-10px);
     }
 
     .sidebar {
@@ -41,11 +56,12 @@
       left: 0;
       height: 100%;
       display: grid;
-      grid-template-rows: 3fr 2fr repeat(9, 1fr) 3fr;
+      grid-template-rows: 3fr 2fr repeat(9, 1fr) 2fr;
       background: url("img4.jpeg") no-repeat center center/cover;
       color: yellow;
-      transition: left 0.3s ease;
+      transition: transform 0.3s ease;
       z-index: 1001;
+      overflow-y: auto;
     }
 
     .hero {
@@ -130,10 +146,6 @@
     }
 
     .footer-box {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
       width: 85%;
       background: rgba(0, 0, 0, 0.6);
       border: 2px solid yellow;
@@ -143,6 +155,13 @@
       font-size: 18px;
       color: white;
       box-shadow: 0 0 10px yellow, 0 0 20px rgba(255,255,0,0.6);
+      margin-top: auto;
+      margin-bottom: 10px;
+      align-self: center;
+    }
+
+    .footer-box p {
+      margin: 6px 0;
     }
 
     .sections a {
@@ -213,15 +232,16 @@
 
     @media screen and (max-width: 1024px) {
       .menu-icon {
-        display: block;
+        display: flex;
       }
       .sidebar {
         width: 25%;
-        left: -100%;
-        transition: left 0.3s ease;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
       }
-      .menu-btn:checked ~ .sidebar {
-        left: 0;
+      #menu-toggle:checked ~ .sidebar {
+        transform: translateX(0);
       }
       .hero {
         margin-left: 0;
@@ -254,6 +274,7 @@
         width: 90%;
         font-size: 16px;
         padding: 10px;
+        margin-bottom: 10px;
       }
       .projects-section {
         width: 80%;
@@ -278,15 +299,16 @@
 
     @media screen and (max-width: 768px) {
       .menu-icon {
-        display: block;
+        display: flex;
       }
       .sidebar {
         width: 70%;
-        left: -100%;
-        transition: left 0.3s ease;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
       }
-      .menu-btn:checked ~ .sidebar {
-        left: 0;
+      #menu-toggle:checked ~ .sidebar {
+        transform: translateX(0);
       }
       .hero {
         margin-left: 0;
@@ -319,6 +341,7 @@
         width: 90%;
         font-size: 14px;
         padding: 8px;
+        margin-bottom: 10px;
       }
       .projects-section {
         width: 90%;
@@ -340,11 +363,24 @@
         width: 95%;
       }
     }
+
+    @media screen and (min-width: 769px) {
+      .menu-icon {
+        display: none;
+      }
+      .sidebar {
+        transform: translateX(0);
+      }
+    }
   </style>
 </head>
 <body>
-  <input type="checkbox" id="menu-btn" class="menu-btn">
-  <label for="menu-btn" class="menu-icon">&#9776;</label>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
 
   <div class="sidebar">
     <div class="img"><img src="profilepic.jpeg" alt="ANTARIKSH TAMULY"></div>
@@ -353,15 +389,15 @@
       <p class="info" style="font-size: 20px; bottom: 35px; position: relative;"><i>Student @🎓Scaler School of Technology & 🏫IIT Madras</i></p>
     </div>
     <div class="section">
-      <div class="sections" style="display: flex; justify-content: center;"><a href="index.html">About</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="education.html">Education</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="skills.html">Skills</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="projects.html">Projects</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="error404.html">Tech Achievements</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="other acvhievements.html">Other Achievements</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="leadership.html">Leadership</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="certification.html">Certifications</a></div>
-      <div class="sections" style="display: flex; justify-content: center;"><a href="contacts.html">Contact</a></div>
+      <div class="sections"><a href="index.html">About</a></div>
+      <div class="sections"><a href="education.html">Education</a></div>
+      <div class="sections"><a href="skills.html">Skills</a></div>
+      <div class="sections"><a href="projects.html">Projects</a></div>
+      <div class="sections"><a href="error404.html">Tech Achievements</a></div>
+      <div class="sections"><a href="other acvhievements.html">Other Achievements</a></div>
+      <div class="sections"><a href="leadership.html">Leadership</a></div>
+      <div class="sections"><a href="certification.html">Certifications</a></div>
+      <div class="sections"><a href="contacts.html">Contact</a></div>
     </div>
     <div class="footer-box">
       <p>📞 +91 7638012902</p>
@@ -385,7 +421,7 @@
         <li><a href="moon-orbit.html">Moon Orbit</a></li>
         <li><a href="grid.html">Grid</a></li>
         <li><a href="forms.html">Forms</a></li>
-        <li><a href="dog gallery.html"> Dog Gallery</a></li>
+        <li><a href="dog gallery.html">Dog Gallery</a></li>
         <li><a href="Activity.html">Semantic Tags</a></li>
         <li><a href="#">Project 13</a></li>
       </ul>
