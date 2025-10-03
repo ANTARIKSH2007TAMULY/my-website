@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Projects</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    .menu-icon {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 30px;
+      color: yellow;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .menu-icon div {
+      width: 30px;
+      height: 4px;
+      background: yellow;
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    .sidebar {
+      width: 20%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 3fr 2fr repeat(9, 1fr) 3fr;
+      background: url("img4.jpeg") no-repeat center center/cover;
+      color: yellow;
+      transition: left 0.3s ease;
+      z-index: 1001;
+    }
+
+    .hero {
+      margin-left: 20%;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+      overflow-y: auto;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 3, 65, 0.4);
+      z-index: -1;
+    }
+
+    div.sections {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;  
+      padding: 25px;
+      border: 1px solid black;
+      transition: all 0.3s ease;
+    }
+
+    div.sections:hover {
+      color: rgba(168, 201, 21, 0.95);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px rgba(168, 201, 21, 0.95),
+                  0 0 30px rgba(168, 201, 21, 0.7),
+                  0 0 45px rgba(168, 201, 21, 0.5);
+      border-color: rgba(168, 201, 21, 0.95);
+    }
+
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      top: 15px;
+    }
+
+    div.img {
+      display: flex;
+      justify-content: center;
+    }
+
+    div.info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    p.name {
+      text-align: center;
+    }
+
+    p.info {
+      text-align: center;
+    }
+
+    .footer-box {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 85%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid yellow;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 0 10px yellow, 0 0 20px rgba(255,255,0,0.6);
+    }
+
+    .sections a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .projects-section {
+      position: relative;
+      width: 60%;
+      min-height: 400px;
+      margin: 50px auto;
+      background: rgba(0, 0, 0, 0.75);
+      border-radius: 20px;
+      border: 3px solid yellow;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      color: #f5f5f5;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .projects-section h2 {
+      color: yellow;
+      text-shadow: 0 0 12px yellow, 0 0 25px rgba(255, 255, 0, 0.6);
+      font-size: 50px;
+      margin-bottom: 40px;
+    }
+
+    .projects-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .projects-section ul li {
+      font-size: 28px;
+      margin: 10px 0;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      width: 80%;
+      text-align: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .projects-section ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .projects-section ul li:hover {
+      transform: translateY(-5px);
+      background: rgba(168, 201, 21, 0.2);
+    }
+
+    @media screen and (max-width: 1024px) {
+      .menu-icon {
+        display: block;
+      }
+      .sidebar {
+        width: 25%;
+        left: -100%;
+        transition: left 0.3s ease;
+      }
+      .menu-btn:checked ~ .sidebar {
+        left: 0;
+      }
+      .hero {
+        margin-left: 0;
+        padding: 40px 15px;
+      }
+      .bg-video, .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 140px;
+        height: 140px;
+        top: 12px;
+      }
+      p.name {
+        font-size: 26px;
+      }
+      p.info {
+        font-size: 18px;
+        bottom: 30px;
+      }
+      div.sections {
+        font-size: 26px;
+        padding: 20px;
+      }
+      .footer-box {
+        width: 90%;
+        font-size: 16px;
+        padding: 10px;
+      }
+      .projects-section {
+        width: 80%;
+        padding: 30px 15px;
+        margin: 40px auto;
+        min-height: 350px;
+      }
+      .projects-section h2 {
+        font-size: 40px;
+        margin-bottom: 30px;
+      }
+      .projects-section ul {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .projects-section ul li {
+        font-size: 24px;
+        padding: 12px;
+        width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+      .sidebar {
+        width: 70%;
+        left: -100%;
+        transition: left 0.3s ease;
+      }
+      .menu-btn:checked ~ .sidebar {
+        left: 0;
+      }
+      .hero {
+        margin-left: 0;
+        padding: 30px 10px;
+      }
+      .bg-video, .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 120px;
+        height: 120px;
+        top: 10px;
+      }
+      p.name {
+        font-size: 24px;
+      }
+      p.info {
+        font-size: 16px;
+        bottom: 25px;
+      }
+      div.sections {
+        font-size: 22px;
+        padding: 15px;
+      }
+      .footer-box {
+        width: 90%;
+        font-size: 14px;
+        padding: 8px;
+      }
+      .projects-section {
+        width: 90%;
+        padding: 20px 10px;
+        margin: 30px auto;
+        min-height: 300px;
+      }
+      .projects-section h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+      .projects-section ul {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .projects-section ul li {
+        font-size: 20px;
+        padding: 10px;
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="menu-btn" class="menu-btn">
+  <label for="menu-btn" class="menu-icon">&#9776;</label>
+
+  <div class="sidebar">
+    <div class="img"><img src="profilepic.jpeg" alt="ANTARIKSH TAMULY"></div>
+    <div class="info">
+      <p class="name" style="font-size: 30px;">ANTARIKSH TAMULY</p>
+      <p class="info" style="font-size: 20px; bottom: 35px; position: relative;"><i>Student @🎓Scaler School of Technology & 🏫IIT Madras</i></p>
+    </div>
+    <div class="section">
+      <div class="sections" style="display: flex; justify-content: center;"><a href="index.html">About</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="education.html">Education</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="skills.html">Skills</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="projects.html">Projects</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="error404.html">Tech Achievements</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="other acvhievements.html">Other Achievements</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="leadership.html">Leadership</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="certification.html">Certifications</a></div>
+      <div class="sections" style="display: flex; justify-content: center;"><a href="contacts.html">Contact</a></div>
+    </div>
+    <div class="footer-box">
+      <p>📞 +91 7638012902</p>
+      <p>📧 tamulyantariksh601@gmail.com</p>
+    </div>
+  </div>
+
+  <div class="hero">
+    <video autoplay muted loop class="bg-video">
+      <source src="videos/tech-bg.mp4" type="video/mp4">
+    </video>
+    <div class="projects-section">
+      <h2>Projects</h2>
+      <ul>
+        <li><a href="ferris-wheel.html">Ferris Wheel</a></li>
+        <li><a href="List.html">List</a></li>
+        <li><a href="shapes.html">Shapes</a></li>
+        <li><a href="table.html">Table</a></li>
+        <li><a href="Reecipe.html">Recipe List</a></li>
+        <li><a href="profile-card.html">Profile Card</a></li>
+        <li><a href="moon-orbit.html">Moon Orbit</a></li>
+        <li><a href="grid.html">Grid</a></li>
+        <li><a href="forms.html">Forms</a></li>
+        <li><a href="dog gallery.html"> Dog Gallery</a></li>
+        <li><a href="Activity.html">Semantic Tags</a></li>
+        <li><a href="#">Project 13</a></li>
+      </ul>
+    </div>
+    <div class="overlay"></div>
+  </div>
+</body>
+</html>

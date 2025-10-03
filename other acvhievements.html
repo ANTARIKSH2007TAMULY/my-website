@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio with Sidebar Grid</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    .menu-icon {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1002;
+      cursor: pointer;
+    }
+
+    .menu-icon div {
+      width: 30px;
+      height: 4px;
+      background: yellow;
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    .menu-btn:checked + .menu-icon div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-btn:checked + .menu-icon div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-btn:checked + .menu-icon div:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .sidebar {
+      width: 20%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+      background: url("img4.jpeg") no-repeat center center/cover;
+      color: yellow;
+      z-index: 1001;
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .hero {
+      margin-left: 20%;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+      overflow-y: auto;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 3, 65, 0.4);
+      z-index: -1;
+    }
+
+    div.sections {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      padding: 25px;
+      border: 1px solid black;
+      transition: all 0.3s ease;
+    }
+
+    div.sections:hover {
+      color: rgba(168, 201, 21, 0.95);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px rgba(168, 201, 21, 0.95),
+                  0 0 30px rgba(168, 201, 21, 0.7),
+                  0 0 45px rgba(168, 201, 21, 0.5);
+      border-color: rgba(168, 201, 21, 0.95);
+    }
+
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      top: 15px;
+    }
+
+    div.img {
+      display: flex;
+      justify-content: center;
+    }
+
+    div.info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    p.name {
+      text-align: center;
+      font-size: 30px;
+    }
+
+    p.info {
+      text-align: center;
+      font-size: 20px;
+      position: relative;
+      bottom: 35px;
+    }
+
+    .footer-box {
+      width: 85%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid yellow;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 0 10px yellow, 0 0 20px rgba(255,255,0,0.6);
+      margin-top: auto;
+      margin-bottom: 10px;
+      align-self: center;
+    }
+
+    .footer-box p {
+      margin: 6px 0;
+    }
+
+    .sections a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .intro {
+      position: relative;
+      max-width: 80%;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid yellow;
+      font-size: 22px;
+      line-height: 1.8;
+      color: #f5f5f5;
+      text-align: left;
+      box-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+      z-index: 1;
+    }
+
+    .intro h1 {
+      font-size: 36px;
+      color: yellow;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px yellow, 0 0 20px rgba(255, 255, 0, 0.6);
+    }
+
+    .intro ul {
+      margin: 20px 0 0 20px;
+    }
+
+    .intro ul li {
+      margin-bottom: 12px;
+    }
+
+    .links-section {
+      position: relative;
+      max-width: 80%;
+      margin: 40px auto 0 auto;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 25px;
+      border-radius: 15px;
+      border: 2px solid yellow;
+      font-size: 20px;
+      color: #f5f5f5;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 255, 0, 0.7);
+      z-index: 1;
+    }
+
+    .links-section h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: yellow;
+      text-shadow: 0 0 10px yellow, 0 0 20px rgba(255, 255, 0, 0.6);
+    }
+
+    .links-section a {
+      display: block;
+      margin: 12px 0;
+      padding: 12px;
+      border: 2px solid yellow;
+      border-radius: 10px;
+      color: yellow;
+      font-size: 18px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .links-section a:hover {
+      background: yellow;
+      color: black;
+      box-shadow: 0 0 15px yellow;
+    }
+
+    .pic-gallery {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .pic-gallery img {
+      width: 250px;
+      height: auto;
+      border: 3px solid yellow;
+      border-radius: 12px;
+      box-shadow: 0 0 15px yellow;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .menu-icon {
+        display: block;
+      }
+      .sidebar {
+        width: 25%;
+        transform: translateX(-100%);
+        grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+      }
+      .menu-btn:checked ~ .sidebar {
+        transform: translateX(0);
+      }
+      .hero {
+        margin-left: 0;
+        padding: 40px 15px;
+      }
+      .bg-video, .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 140px;
+        height: 140px;
+        top: 12px;
+      }
+      p.name {
+        font-size: 30px;
+      }
+      p.info {
+        font-size: 20px;
+        bottom: 30px;
+      }
+      div.sections {
+        font-size: 30px;
+        padding: 20px;
+      }
+      .footer-box {
+        width: 90%;
+        font-size: 16px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .intro {
+        max-width: 85%;
+        padding: 25px;
+        font-size: 20px;
+      }
+      .intro h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+      }
+      .intro ul li {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      .links-section {
+        max-width: 85%;
+        padding: 20px;
+        font-size: 18px;
+        margin: 30px auto 0 auto;
+      }
+      .links-section h2 {
+        font-size: 26px;
+        margin-bottom: 12px;
+      }
+      .links-section a {
+        font-size: 16px;
+        padding: 10px;
+      }
+      .pic-gallery img {
+        width: 200px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+      .sidebar {
+        width: 70%;
+        transform: translateX(-100%);
+        grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+      }
+      .menu-btn:checked ~ .sidebar {
+        transform: translateX(0);
+      }
+      .hero {
+        margin-left: 0;
+        padding: 30px 10px;
+      }
+      .bg-video, .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 120px;
+        height: 120px;
+        top: 10px;
+      }
+      p.name {
+        font-size: 30px;
+      }
+      p.info {
+        font-size: 20px;
+        bottom: 25px;
+      }
+      div.sections {
+        font-size: 30px;
+        padding: 15px;
+      }
+      .footer-box {
+        width: 90%;
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+      .intro {
+        max-width: 90%;
+        padding: 20px;
+        font-size: 18px;
+      }
+      .intro h1 {
+        font-size: 28px;
+        margin-bottom: 12px;
+      }
+      .intro ul li {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      .links-section {
+        max-width: 90%;
+        padding: 15px;
+        font-size: 16px;
+        margin: 20px auto 0 auto;
+      }
+      .links-section h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+      .links-section a {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .pic-gallery img {
+        width: 150px;
+      }
+    }
+
+    @media screen and (min-width: 769px) {
+      .menu-icon {
+        display: none;
+      }
+      .sidebar {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="menu-btn" class="menu-btn">
+  <label for="menu-btn" class="menu-icon">
+    <div></div>
+    <div></div>
+    <div></div>
+  </label>
+
+  <div class="sidebar">
+    <div class="img">
+      <img src="profilepic.jpeg" alt="ANTARIKSH TAMULY">
+    </div>
+    <div class="info">
+      <p class="name">ANTARIKSH TAMULY</p>
+      <p class="info"><i>Student @🎓Scaler School of Technology & 🏫IIT Madras</i></p>
+    </div>
+    <div class="section">
+      <div class="sections"><a href="index.html">About</a></div>
+      <div class="sections"><a href="education.html">Education</a></div>
+      <div class="sections"><a href="skills.html">Skills</a></div>
+      <div class="sections"><a href="projects.html">Projects</a></div>
+      <div class="sections"><a href="error404.html">Tech Achievements</a></div>
+      <div class="sections"><a href="other_achievements.html">Other Achievements</a></div>
+      <div class="sections"><a href="leadership.html">Leadership</a></div>
+      <div class="sections"><a href="certification.html">Certifications</a></div>
+      <div class="sections"><a href="contacts.html">Contact</a></div>
+    </div>
+    <div class="footer-box">
+      <p>📞 +91 7638012902</p>
+      <p>📧 tamulyantariksh601@gmail.com</p>
+    </div>
+  </div>
+
+  <div class="hero">
+    <video autoplay muted loop playsinline preload="auto" class="bg-video">
+      <source src="videos/tech-bg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="intro">
+      <h1>Achievements & Tennis Journey</h1>
+      <p>
+        I am <b>Antariksh Tamuly</b>, a passionate tennis player who has been training and competing since the age of 6. 
+        Over the years, I have consistently performed at the state, national, and Asian levels, achieving milestones that reflect both dedication and perseverance.
+      </p>
+      <ul>
+        <li>Achieved a career-high <b>Asian ranking of 9</b> in lawn tennis.</li>
+        <li>Held the position of <b>Rank 1 in Assam</b> across multiple categories for several years.</li>
+        <li>Consistently ranked within the <b>Top 20 nationally</b> in various categories over the years.</li>
+        <li>Became the <b>State U-18 Champion</b> at the age of 13, showcasing early excellence against older competition.</li>
+        <li>Competed in and reached <b>100+ finals</b> across Asian, state, and national level tournaments.</li>
+      </ul>
+      <p>
+        These experiences have shaped me not only as a player but also as an individual who values discipline, resilience, and sportsmanship.
+      </p>
+    </div>
+    <div class="links-section">
+      <h2>Proofs & References</h2>
+      <a href="https://buzzato.com/tennis/aita/player/426198/Antariksh-Tamuly" target="_blank">
+        Sports Profile (Note: All data not updated on this website)
+      </a>
+      <a href="https://atf.tournamentsoftware.com/ranking/category.aspx?id=34350&category=5652" target="_blank">
+        My Asian Ranking
+      </a>
+      <a href="https://www.google.com/search?q=ANTARIKSH+TAMULY" target="_blank">
+        Google Search Results
+      </a>
+      <div class="pic-gallery">
+        <a href="Antariksh_google.png">
+          <img src="Antariksh_google.png" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio with Sidebar Grid</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .sidebar {
+      width: 20%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 3fr;
+      background: url("img4.jpeg") no-repeat center center/cover;
+      color: yellow;
+    }
+
+    .hero {
+      margin-left: 20%;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 3, 65, 0.4);
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+    }
+
+    .hero .Name {
+      font-size: 80px;
+      font-weight: bold;
+    }
+
+    .hero p {
+      font-size: 30px;
+    }
+
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      top: 15px;
+    }
+
+    div.img {
+      display: flex;
+      justify-content: center;
+    }
+
+    div.info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    p.name {
+      text-align: center;
+    }
+
+    p.info {
+      text-align: center;
+    }
+
+    p.namesidebar {
+      font-size: medium;
+    }
+
+    div.sections {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      padding: 25px;
+    }
+
+    div.sections:hover {
+      color: rgba(168, 201, 21, 0.85);
+    }
+
+    div.portfolio {
+      position: absolute;
+      top: 50px;
+    }
+
+    .findmeon {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      text-align: left;
+    }
+
+    .findmeonimg {
+      margin-top: 5px;
+      display: flex;
+    }
+
+    .findmeonimg img {
+      width: 100px;
+      height: 100px;
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+
+    .SKILLAT {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      text-align: right;
+    }
+
+    .SKILLAT p {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .skillat img {
+      width: 100px;
+      height: 100px;
+      margin-left: 12px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="img">
+      <img src="profilepic.jpeg" alt="ANTARIKSH TAMULY">
+    </div>
+
+    <div class="info">
+      <p class="name" style="font-size: 30px;">ANTARIKSH TAMULY</p>
+      <p class="info" style="font-size: 20px; position: relative; bottom: 35px;"><i>Student @🎓Scaler School of Technology & 🏫IIT Madras</i></p>
+    </div>
+
+    <div class="section">
+      <div class="sections" style="border: 1px solid black">About</div>
+      <div class="sections" style="border: 1px solid black">Education</div>
+      <div class="sections" style="border: 1px solid black">Skills</div>
+      <div class="sections" style="border: 1px solid black">Projects</div>
+      <div class="sections" style="border: 1px solid black">Tech Achievements</div>
+      <div class="sections" style="border: 1px solid black">Other Achievements</div>
+      <div class="sections" style="border: 1px solid black">Leadership</div>
+      <div class="sections" style="border: 1px solid black">Certifications</div>
+      <div class="sections" style="border: 1px solid black">Contact</div>
+    </div>
+
+    <div class="empty" style="position: absolute; bottom: 5px;">
+      <p style="font-size: 20px; position: relative; top: 5px;">@+917638012902</p>
+      <p style="font-size: 20px; position: relative; bottom: 5px;text-align: center;">@tamulyantariksh601@gmail.com</p>
+    </div>
+  </div>
+
+  <div class="hero">
+    <video autoplay muted loop class="bg-video">
+      <source src="videos/tech-bg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="portfolio">
+      <h1>Welcome to the Portfolio of <br><span class="Name">ANTARIKSH TAMULY</span></h1>
+      <p>Tech Enthusiast | Web Developer | AI & ML Learner</p>
+    </div>
+
+    <div class="findmeon">
+      <p style="font-size: 25px; position: relative; top: 10px;">Find Me On:</p>
+      <div class="findmeonimg">
+        <a href="https://github.com/ANTARIKSH2007TAMULY"><img src="github.jpeg" alt="GitHub" style="position: relative; right:10px;"></a>
+        <a href="https://www.linkedin.com/in/antariksh-tamuly-5307ab373"><img src="linkedin.jpeg" alt="LinkedIn " style="position: relative; right: 12px"></a>
+      </div>
+    </div>
+
+    <div class="SKILLAT">
+      <p>Best Skills At:</p>
+      <div class="skillat">
+        <img src="javalogo.jpeg" alt="Java">
+        <img src="csslogo.jpeg" alt="CSS">
+        <img src="cpplogo.jpeg" alt="C++">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

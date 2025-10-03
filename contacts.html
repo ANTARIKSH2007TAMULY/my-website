@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio with Sidebar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .menu-icon {
+      width: 35px;
+      height: 30px;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-icon span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: yellow;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    #menu-toggle:checked + .menu-icon span:nth-child(1) {
+      transform: rotate(45deg) translateY(10px);
+    }
+
+    #menu-toggle:checked + .menu-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #menu-toggle:checked + .menu-icon span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-10px);
+    }
+
+    .sidebar {
+      width: 20%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      display: grid;
+      grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+      background: url("img4.jpeg") no-repeat center center/cover;
+      color: yellow;
+      transition: transform 0.3s ease;
+      z-index: 1001;
+      overflow-y: auto;
+    }
+
+    .hero {
+      margin-left: 20%;
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+      overflow-y: auto;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 3, 65, 0.4);
+      z-index: -1;
+    }
+
+    div.sections {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      padding: 25px;
+      border: 1px solid black;
+      transition: all 0.3s ease;
+    }
+
+    div.sections:hover {
+      color: rgba(168, 201, 21, 0.95);
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 15px rgba(168, 201, 21, 0.95),
+                  0 0 30px rgba(168, 201, 21, 0.7),
+                  0 0 45px rgba(168, 201, 21, 0.5);
+      border-color: rgba(168, 201, 21, 0.95);
+    }
+
+    img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      position: relative;
+      top: 15px;
+    }
+
+    div.img {
+      display: flex;
+      justify-content: center;
+    }
+
+    div.info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    p.name {
+      text-align: center;
+      font-size: 30px;
+    }
+
+    p.info {
+      text-align: center;
+      font-size: 20px;
+      position: relative;
+      bottom: 35px;
+    }
+
+    .footer-box {
+      width: 85%;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid yellow;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 0 10px yellow, 0 0 20px rgba(255,255,0,0.6);
+      margin-top: auto;
+      margin-bottom: 10px;
+      align-self: center;
+    }
+
+    .footer-box p {
+      margin: 6px 0;
+    }
+
+    .sections a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .contact-section {
+      position: relative;
+      max-width: 60%;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 50px;
+      margin: 50px auto;
+      border-radius: 20px;
+      border: 3px solid yellow;
+      font-size: 28px;
+      line-height: 2;
+      color: #f5f5f5;
+      text-align: left;
+      box-shadow: 0 0 30px rgba(255, 255, 0, 0.9);
+      z-index: 1;
+    }
+
+    .contact-section h2 {
+      font-size: 42px;
+      color: yellow;
+      margin-bottom: 25px;
+      text-align: center;
+      text-shadow: 0 0 12px yellow, 0 0 25px rgba(255, 255, 0, 0.6);
+    }
+
+    .contact-section p {
+      font-size: 28px;
+      margin: 10px 0;
+    }
+
+    .contact-section a {
+      color: #f5f5f5;
+      text-decoration: underline;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      display: inline-block;
+      max-width: 100%;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .menu-icon {
+        display: flex;
+      }
+      .sidebar {
+        width: 25%;
+        transform: translateX(-100%);
+        grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+      }
+      #menu-toggle:checked ~ .sidebar {
+        transform: translateX(0);
+      }
+      .hero {
+        margin-left: 0;
+        padding: 40px 15px;
+      }
+      .bg-video, .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 140px;
+        height: 140px;
+        top: 12px;
+      }
+      p.name {
+        font-size: 30px;
+      }
+      p.info {
+        font-size: 20px;
+        bottom: 30px;
+      }
+      div.sections {
+        font-size: 30px;
+        padding: 20px;
+      }
+      .footer-box {
+        width: 90%;
+        font-size: 16px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .contact-section {
+        max-width: 80%;
+        padding: 40px;
+        margin: 40px auto;
+        font-size: 24px;
+      }
+      .contact-section h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+      .contact-section p {
+        font-size: 24px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .menu-icon {
+        display: flex;
+      }
+      .sidebar {
+        width: 70%;
+        transform: translateX(-100%);
+        grid-template-rows: 3fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+      }
+      #menu-toggle:checked ~ .sidebar {
+        transform: translateX(0);
+      }
+      .hero {
+        margin-left: 0;
+        padding: 30px 10px;
+      }
+      .bg-video, .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        width: 120px;
+        height: 120px;
+        top: 10px;
+      }
+      p.name {
+        font-size: 30px;
+      }
+      p.info {
+        font-size: 20px;
+        bottom: 25px;
+      }
+      div.sections {
+        font-size: 30px;
+        padding: 15px;
+      }
+      .footer-box {
+        width: 90%;
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+      .contact-section {
+        max-width: 90%;
+        padding: 30px;
+        margin: 30px auto;
+        font-size: 20px;
+      }
+      .contact-section h2 {
+        font-size: 30px;
+        margin-bottom: 15px;
+      }
+      .contact-section p {
+        font-size: 20px;
+      }
+    }
+
+    @media screen and (min-width: 769px) {
+      .menu-icon {
+        display: none;
+      }
+      .sidebar {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+  <div class="sidebar">
+    <div class="img">
+      <img src="profilepic.jpeg" alt="ANTARIKSH TAMULY">
+    </div>
+    <div class="info">
+      <p class="name">ANTARIKSH TAMULY</p>
+      <p class="info"><i>Student @🎓Scaler School of Technology & 🏫IIT Madras</i></p>
+    </div>
+    <div class="section">
+      <div class="sections"><a href="index.html">About</a></div>
+      <div class="sections"><a href="education.html">Education</a></div>
+      <div class="sections"><a href="skills.html">Skills</a></div>
+      <div class="sections"><a href="projects.html">Projects</a></div>
+      <div class="sections"><a href="error404.html">Tech Achievements</a></div>
+      <div class="sections"><a href="other_achievements.html">Other Achievements</a></div>
+      <div class="sections"><a href="leadership.html">Leadership</a></div>
+      <div class="sections"><a href="certification.html">Certifications</a></div>
+      <div class="sections"><a href="contacts.html">Contact</a></div>
+    </div>
+    <div class="footer-box">
+      <p>📞 +91 7638012902</p>
+      <p>📧 tamulyantariksh601@gmail.com</p>
+    </div>
+  </div>
+  <div class="hero">
+    <video autoplay muted loop class="bg-video">
+      <source src="videos/tech-bg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="contact-section">
+      <h2>Contact & Links</h2>
+      <p><strong>Email:</strong> tamulyantariksh601@gmail.com</p>
+      <p><strong>Phone:</strong> +91-7638012902</p>
+      <p><strong>Alternate Phone:</strong> +91-9435054691</p>
+      <p><strong>Home Address:</strong> Dhekial, Molokhuguri, Near Namghar, Golaghat, Assam</p>
+      <p><strong>Home Address Pincode:</strong> 785622</p>
+      <p><strong>Residential Address:</strong> Skyward Tech Park, PARADISE BUILDING, 47/11, Velankani Drive, opposite Velankani Tech Park, next to SJR EQUINOX, Electronic City Phase I, Electronic City, Bengaluru, Karnataka</p>
+      <p><strong>Residential Address Pincode:</strong> 560100</p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/ANTARIKSH2007TAMULY" target="_blank">github.com/ANTARIKSH2007TAMULY</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/antariksh-tamuly-5307ab373" target="_blank">linkedin.com/in/antariksh-tamuly-5307ab373</a></p>
+    </div>
+  </div>
+</body>
+</html>

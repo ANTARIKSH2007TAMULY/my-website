@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar System</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(ellipse at center, #000 0%, #020024 100%);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sun {
+  width: 120px;
+  height: 120px;
+  background: yellow;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 80px 40px yellow, 0 0 150px 60px orange;
+}
+
+.orbit {
+  position: absolute;
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 50%;
+  animation: rotate linear infinite;
+}
+
+.orbit1 { width: 200px; height: 200px; animation-duration: 6s; }
+.orbit2 { width: 300px; height: 300px; animation-duration: 10s; }
+.orbit3 { width: 400px; height: 400px; animation-duration: 15s; }
+.orbit4 { width: 500px; height: 500px; animation-duration: 22s; }
+.orbit5 { width: 600px; height: 600px; animation-duration: 30s; }
+.orbit6 { width: 700px; height: 700px; animation-duration: 38s; }
+.orbit7 { width: 800px; height: 800px; animation-duration: 45s; }
+.orbit8 { width: 900px; height: 900px; animation-duration: 55s; }
+
+.planet {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px currentColor;
+}
+
+/* Increasing planet sizes */
+.planet1 { background: #ff7f50; width: 12px; height: 12px; }
+.planet2 { background: #6495ed; width: 16px; height: 16px; }
+.planet3 { background: #90ee90; width: 20px; height: 20px; }
+.planet4 { background: #ff4500; width: 26px; height: 26px; }
+.planet5 { background: #f4e542; width: 34px; height: 34px; }
+.planet6 { background: #8a2be2; width: 42px; height: 42px; }
+.planet7 { background: #00ced1; width: 50px; height: 50px; }
+.planet8 { background: #ff1493; width: 60px; height: 60px; }
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<div class="sun"></div>
+<div class="orbit orbit1"><div class="planet planet1"></div></div>
+<div class="orbit orbit2"><div class="planet planet2"></div></div>
+<div class="orbit orbit3"><div class="planet planet3"></div></div>
+<div class="orbit orbit4"><div class="planet planet4"></div></div>
+<div class="orbit orbit5"><div class="planet planet5"></div></div>
+<div class="orbit orbit6"><div class="planet planet6"></div></div>
+<div class="orbit orbit7"><div class="planet planet7"></div></div>
+<div class="orbit orbit8"><div class="planet planet8"></div></div>
+</body>
+</html>
