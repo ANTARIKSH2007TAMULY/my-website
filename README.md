@@ -33,5 +33,29 @@ The project is fully *static* — no JavaScript or backend functionality.
 ---
 
 ## 📁 Project Structure (approximate)
+my-website/
+├── index.html
+├── about.html
+├── projects.html
+├── contacts.html
+├── skills.html
+├── education.html
+├── certification.html
+├── forms.html
+├── grid.html
+├── table.html
+│
+├── assets/
+│ ├── css/
+│ │ ├── style.css
+│ │ └── responsive.css # (if applicable)
+│ ├── images/
+│ │ ├── profile.jpg
+│ │ ├── certificates/
+│ │ └── projects/
+│ └── icons/
+│
+├── .gitignore
+└── README.md
 
 
